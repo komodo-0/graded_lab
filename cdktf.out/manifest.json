@@ -1,0 +1,16 @@
+{
+  "stacks": {
+    "graded_lab": {
+      "annotations": [
+      ],
+      "constructPath": "graded_lab",
+      "dependencies": [
+      ],
+      "name": "graded_lab",
+      "stackMetadataPath": "stacks/graded_lab/metadata.json",
+      "synthesizedStackPath": "stacks/graded_lab/cdk.tf.json",
+      "workingDirectory": "stacks/graded_lab"
+    }
+  },
+  "version": "0.20.11"
+}

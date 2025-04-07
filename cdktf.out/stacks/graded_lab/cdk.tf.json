@@ -1,0 +1,89 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "graded_lab",
+      "version": "0.20.11"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "aws": [
+      {
+        "region": "us-east-1"
+      }
+    ]
+  },
+  "resource": {
+    "aws_lambda_event_source_mapping": {
+      "event_source_mapping": {
+        "//": {
+          "metadata": {
+            "path": "graded_lab/event_source_mapping",
+            "uniqueId": "event_source_mapping"
+          }
+        },
+        "event_source_arn": "${aws_sqs_queue.queue_input.arn}",
+        "function_name": "${aws_lambda_function.lambda.arn}"
+      }
+    },
+    "aws_lambda_function": {
+      "lambda": {
+        "//": {
+          "metadata": {
+            "path": "graded_lab/lambda",
+            "uniqueId": "lambda"
+          }
+        },
+        "environment": {
+          "variables": {
+            "foo": "bar"
+          }
+        },
+        "filename": "assets/code/3B2DB6A0216AD6FFD44E50A3A690524E/archive.zip",
+        "function_name": "calculatrice",
+        "handler": "lambda_function.lambda_handler",
+        "memory_size": 128,
+        "role": "arn:aws:iam::515223095317:role/LabRole",
+        "runtime": "python3.9",
+        "timeout": 60
+      }
+    },
+    "aws_sqs_queue": {
+      "queue_input": {
+        "//": {
+          "metadata": {
+            "path": "graded_lab/queue_input",
+            "uniqueId": "queue_input"
+          }
+        },
+        "name": "input_queue",
+        "visibility_timeout_seconds": 60
+      },
+      "queue_output": {
+        "//": {
+          "metadata": {
+            "path": "graded_lab/queue_output",
+            "uniqueId": "queue_output"
+          }
+        },
+        "name": "output_queue",
+        "visibility_timeout_seconds": 60
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "/home/ensai/Etudes/graded_lab/terraform.graded_lab.tfstate"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.92.0"
+      }
+    }
+  }
+}
