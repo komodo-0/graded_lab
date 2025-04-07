@@ -1,7 +1,9 @@
 import json
 import boto3
+import os
 
 sqs = boto3.client('sqs')
+output_queue_url = os.getenv("OUTPUT_QUEUE_URL")
 
 def lambda_handler(event, context):
     for record in event["Records"]:
@@ -26,12 +28,12 @@ def lambda_handler(event, context):
                 result = number1 / number2
         
         sqs.send_message(
-            QueueUrl="https://sqs.us-east-1.amazonaws.com/515223095317/output_queue",
+            QueueUrl= output_queue_url,
             MessageBody=json.dumps({"body": result})
         )
 
         return {
          'statusCode': 200,
-         'body': result
+         'body': "Succès"
          }
 

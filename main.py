@@ -35,7 +35,7 @@ class LambdaStack(TerraformStack):
             role="arn:aws:iam::515223095317:role/LabRole",
             filename= code.path,
             handler="lambda_function.lambda_handler",
-            environment={"variables":{"foo":"bar"}}
+            environment={"variables":{"foo":"bar", "OUTPUT_QUEUE_URL": queue_output.url}}
         )
 
         queue_input = SqsQueue(self,
